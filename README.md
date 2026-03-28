@@ -1,3 +1,5 @@
+## forked for azure deployment
+
 # django-postgresql-kubernetes
 This is a Django, with database PostgreSQL Docker/ Kubernetes cluster
 # django_kubernetes
