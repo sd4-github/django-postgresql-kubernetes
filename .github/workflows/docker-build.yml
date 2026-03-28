@@ -1,0 +1,27 @@
+name: Build and Push to ACR
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Login to ACR
+        run: |
+          echo $ACR_PASSWORD | docker login $ACR_LOGIN_SERVER \
+          -u $ACR_USERNAME --password-stdin
+
+      - name: Build Docker Image
+        run: |
+          docker build -t $ACR_LOGIN_SERVER/django-app:v1 .
+
+      - name: Push Docker Image
+        run: |
+          docker push $ACR_LOGIN_SERVER/django-app:v1
